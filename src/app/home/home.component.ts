@@ -55,6 +55,13 @@ export class HomeComponent implements OnInit {
     return this.currentPickedChoices.indexOf(index) >= 0;
   }
 
+  removeAddedRelated(index): void {
+    const positionInArray = this.currentPickedChoices.indexOf(index);
+    if (positionInArray >= 0) {
+      this.currentPickedChoices.splice(positionInArray, 1);
+    }
+  }
+
   ngOnInit() {
   }
 

@@ -10,7 +10,7 @@
         <img src="../../assets/images/plate.png" alt="John Doe" class="mr-3 mt-3 " style="width:40px;">
         <div class="media-body pt-4">
           <div class="custom-control custom-checkbox mb-1">
-            <input type="checkbox" class="custom-control-input" [(ngModel)]="showAll" id="customCheck_{{i}}"
+            <input type="checkbox" class="custom-control-input"  [(ngModel)]="showAll" (change)="removeAddedRelated(i)" id="customCheck_{{i}}"
                    name="example1">
             <label class="custom-control-label" for="customCheck_{{i}}"><strong>{{meal.name}}</strong></label>
           </div>
@@ -21,8 +21,8 @@
                 <li *ngFor="let choice  of meal.choices;let j=index;let showRelated=false;">
                   <div class="custom-control custom-checkbox mb-1 choice">
                     <input type="checkbox" class="custom-control-input" [(ngModel)]="showRelated"
-                           (change)="showExtras(i,showRelated)" id="customCheckChoice_{{j}}" name="example1">
-                    <label class="custom-control-label" for="customCheckChoice_{{j}}">{{choice.name}}</label>
+                           (change)="showExtras(i,showRelated)" id="customCheckChoice_{{i}}_{{j}}" name="example1">
+                    <label class="custom-control-label" for="customCheckChoice_{{i}}_{{j}}">{{choice.name}}</label>
                   </div>
                 </li>
               </ul>
@@ -34,9 +34,9 @@
                   <li *ngFor="let relatedMeal  of meal.related;let j=index;let showAllRelated=false">
                     <div class="custom-control custom-checkbox mb-1">
                       <input type="checkbox" class="custom-control-input" [(ngModel)]="showAllRelated"
-                             id="customCheckRelated_{{j}}" name="example1">
+                             id="customCheckRelated_{{i}}_{{j}}" name="example1">
                       <label class="custom-control-label"
-                             for="customCheckRelated_{{j}}"><b>{{relatedMeal.name}}</b></label>
+                             for="customCheckRelated_{{i}}_{{j}}"><b>{{relatedMeal.name}}</b></label>
                     </div>
                     <div *ngIf="showAllRelated">
                       <div *ngIf="relatedMeal.choices ">
