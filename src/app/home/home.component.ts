@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +7,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
- protected menuList =
+  constructor() {
+  }
+
+  protected menuList = [
+    {
+      name: 'salad',
+      choices: [
+        {name: 'santa'},
+        {name: 'greek'},
+        {name: 'asian'},
+      ],
+      related: [
+        {
+          name: 'Dressing',
+          choices: [
+            {name: 'italian'},
+            {name: 'blue cheese'},
+            {name: 'Ranch'},
+          ]
+        },
+      ]
+    },
+    {
+      name: 'entree',
+      choices: [
+        {name: 'santa'},
+        {name: 'greek'},
+        {name: 'asian'},
+      ],
+      related: []
+    }
+  ];
+
   ngOnInit() {
   }
 
