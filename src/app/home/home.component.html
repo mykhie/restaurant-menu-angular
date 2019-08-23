@@ -1,3 +1,66 @@
-<p>
-  home works!
-</p>
+<div class="card mt-5">
+  <div class="jumbotron " style="border-radius: 0">
+    <h1>Restaurant Menu</h1>
+    <p>Feel free to select any meal</p>
+  </div>
+  <div class="card-body">
+    <div>
+      <!--Loop through the menu items -->
+      <div class="media border p-3 mt-1" *ngFor="let meal of menuList;let i=index;let showAll=false">
+        <img src="../../assets/images/plate.png" alt="John Doe" class="mr-3 mt-3 " style="width:40px;">
+        <div class="media-body pt-4">
+          <div class="custom-control custom-checkbox mb-1">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="showAll" id="customCheck_{{i}}"
+                   name="example1">
+            <label class="custom-control-label" for="customCheck_{{i}}"><strong>{{meal.name}}</strong></label>
+          </div>
+          <!--now loop through the choices if there is any-->
+          <div *ngIf="showAll">
+            <div *ngIf="meal.choices">
+              <ul class="list-unstyled pr-3">
+                <li *ngFor="let choice  of meal.choices;let j=index;let showRelated=false;">
+                  <div class="custom-control custom-checkbox mb-1 choice">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="showRelated"
+                           (change)="showExtras(i,showRelated)" id="customCheckChoice_{{j}}" name="example1">
+                    <label class="custom-control-label" for="customCheckChoice_{{j}}">{{choice.name}}</label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="checkIfExtrasShown(i)">
+              <div *ngIf="meal.related.length">
+                You might also like
+                <ul class="list-unstyled pr-3">
+                  <li *ngFor="let relatedMeal  of meal.related;let j=index;let showAllRelated=false">
+                    <div class="custom-control custom-checkbox mb-1">
+                      <input type="checkbox" class="custom-control-input" [(ngModel)]="showAllRelated"
+                             id="customCheckRelated_{{j}}" name="example1">
+                      <label class="custom-control-label"
+                             for="customCheckRelated_{{j}}"><b>{{relatedMeal.name}}</b></label>
+                    </div>
+                    <div *ngIf="showAllRelated">
+                      <div *ngIf="relatedMeal.choices ">
+                        <ul class="list-unstyled pr-3">
+                          <li *ngFor="let relatedChoice  of meal.choices;let j=index">
+                            <div class="custom-control custom-checkbox mb-1 choice">
+                              <input type="checkbox" class="custom-control-input" id="relatedChoice_{{j}}"
+                                     name="example1">
+                              <label class="custom-control-label"
+                                     for="relatedChoice_{{j}}">{{relatedChoice.name}}</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() {
   }
 
+  currentPickedChoices = [];
   protected menuList = [
     {
       name: 'salad',
@@ -39,6 +40,20 @@ export class HomeComponent implements OnInit {
       related: []
     }
   ];
+
+  showExtras(index, status): void {
+    const positionInArray = this.currentPickedChoices.indexOf(index);
+
+    if (!status && positionInArray >= 0) {
+      this.currentPickedChoices.splice(positionInArray, 1);
+      return;
+    }
+    this.currentPickedChoices.push(index);
+  }
+
+  checkIfExtrasShown(index): boolean {
+    return this.currentPickedChoices.indexOf(index) >= 0;
+  }
 
   ngOnInit() {
   }
